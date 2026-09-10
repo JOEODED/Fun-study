@@ -23,7 +23,6 @@ public class AuthController {
                 request.getPassword()
             );
 
-            // Don't send the hashed password back in the response
             newUser.setPassword(null);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
@@ -33,7 +32,23 @@ public class AuthController {
         }
     }
 
-    // Inner class representing the expected JSON request body
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        try {
+            User user = userService.loginUser(
+                request.getEmail(),
+                request.getPassword()
+            );
+
+            user.setPassword(null);
+
+            return ResponseEntity.status(HttpStatus.OK).body(user);
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
+    }
+
     public static class RegisterRequest {
         private String name;
         private String email;
@@ -41,6 +56,17 @@ public class AuthController {
 
         public String getName() { return name; }
         public void setName(String name) { this.name = name; }
+
+        public String getEmail() { return email; }
+        public void setEmail(String email) { this.email = email; }
+
+        public String getPassword() { return password; }
+        public void setPassword(String password) { this.password = password; }
+    }
+
+    public static class LoginRequest {
+        private String email;
+        private String password;
 
         public String getEmail() { return email; }
         public void setEmail(String email) { this.email = email; }
