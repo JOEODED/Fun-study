@@ -3,7 +3,6 @@ package com.Funstudy.backend.controller;
 import com.Funstudy.backend.model.*;
 import com.Funstudy.backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +14,7 @@ public class SearchController {
 
     @Autowired private CourseRepository courseRepository;
     @Autowired private AssignmentRepository assignmentRepository;
-    @Autowired private StudyTaskRepository studyTaskRepository;
+    @Autowired private StudyTaskRepository taskRepository;
     @Autowired private UserRepository userRepository;
 
     private User getUserFromHeader(String email) {
@@ -24,50 +23,35 @@ public class SearchController {
     }
 
     @GetMapping("/courses")
-    public ResponseEntity<?> searchCourses(@RequestParam String keyword,
+    public ResponseEntity<?> searchCourses(@RequestParam(required = false) String keyword,
                                             @RequestHeader("X-User-Email") String email) {
-        try {
-            User user = getUserFromHeader(email);
-            List<Course> results = courseRepository.findByUserAndCourseNameContainingIgnoreCase(user, keyword);
-            results.forEach(c -> c.getUser().setPassword(null));
-            return ResponseEntity.ok(results);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        User user = getUserFromHeader(email);
+        List<Course> courses = (keyword != null)
+                ? courseRepository.findByUserAndCourseCodeContainingIgnoreCase(user, keyword)
+                : courseRepository.findByUser(user);
+        courses.forEach(c -> c.getUser().setPassword(null));
+        return ResponseEntity.ok(courses);
     }
 
     @GetMapping("/assignments")
-    public ResponseEntity<?> searchAssignments(
-            @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) String status,
-            @RequestHeader("X-User-Email") String email) {
-        try {
-            User user = getUserFromHeader(email);
-            List<Assignment> results;
-            if (keyword != null && !keyword.isBlank()) {
-                results = assignmentRepository.findByUserAndTitleContainingIgnoreCase(user, keyword);
-            } else if (status != null && !status.isBlank()) {
-                results = assignmentRepository.findByUserAndStatus(user, status);
-            } else {
-                results = assignmentRepository.findByUser(user);
-            }
-            results.forEach(a -> a.getUser().setPassword(null));
-            return ResponseEntity.ok(results);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    public ResponseEntity<?> filterAssignments(@RequestParam(required = false) String status,
+                                                @RequestHeader("X-User-Email") String email) {
+        User user = getUserFromHeader(email);
+        List<Assignment> assignments = (status != null)
+                ? assignmentRepository.findByUserAndStatus(user, status)
+                : assignmentRepository.findByUser(user);
+        assignments.forEach(a -> a.getUser().setPassword(null));
+        return ResponseEntity.ok(assignments);
     }
 
     @GetMapping("/tasks")
-    public ResponseEntity<?> filterTasks(@RequestParam String status,
+    public ResponseEntity<?> filterTasks(@RequestParam(required = false) String status,
                                           @RequestHeader("X-User-Email") String email) {
-        try {
-            User user = getUserFromHeader(email);
-            List<StudyTask> results = studyTaskRepository.findByUserAndStatus(user, status);
-            results.forEach(t -> t.getUser().setPassword(null));
-            return ResponseEntity.ok(results);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        User user = getUserFromHeader(email);
+        List<StudyTask> tasks = (status != null)
+                ? taskRepository.findByUserAndStatus(user, status)
+                : taskRepository.findByUser(user);
+        tasks.forEach(t -> t.getUser().setPassword(null));
+        return ResponseEntity.ok(tasks);
     }
 }

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun Study — Courses</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/courses.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="logo">FS</div>
+      <span class="app-name">Fun Study</span>
+    </div>
+    <div class="topbar-right">
+      <span id="userEmail" class="user-email"></span>
+      <div class="avatar"></div>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+  </header>
+
+  <div class="body-layout">
+    <aside class="sidebar">
+      <nav>
+        <a href="dashboard.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          Dashboard
+        </a>
+        <a href="courses.html" class="active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Courses
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Assignments
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Study Tasks
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Grades
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          Timer
+        </a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Courses</h1>
+          <p class="page-sub">Everything you're taking this semester.</p>
+        </div>
+        <button id="addCourseBtn" class="primary-btn">+ Add Course</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="coursesTable">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Lecturer</th>
+              <th>Units</th>
+              <th>Semester</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="coursesBody">
+            <tr><td colspan="6" class="empty-row">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="courseModal" class="modal-overlay hidden">
+    <div class="modal">
+      <h2 id="modalTitle">Add Course</h2>
+      <form id="courseForm">
+        <input type="hidden" id="courseId">
+        <div class="field">
+          <label for="courseCode">Course Code</label>
+          <input type="text" id="courseCode" placeholder="CSC301" required>
+        </div>
+        <div class="field">
+          <label for="courseName">Course Name</label>
+          <input type="text" id="courseName" placeholder="Data Structures" required>
+        </div>
+        <div class="field">
+          <label for="lecturer">Lecturer</label>
+          <input type="text" id="lecturer" placeholder="Dr. Smith">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="creditUnits">Credit Units</label>
+            <input type="number" id="creditUnits" placeholder="3" min="0" required>
+          </div>
+          <div class="field">
+            <label for="semester">Semester</label>
+            <input type="text" id="semester" placeholder="Fall 2026">
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="cancelBtn" class="ghost-btn">Cancel</button>
+          <button type="submit" class="primary-btn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/courses.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun Study — Log In</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page">
+    <div class="brand-panel">
+      <div class="brand-top">
+        <div class="logo">FS</div>
+        <span class="app-name">Fun Study</span>
+      </div>
+      <div class="brand-copy">
+        <h1>Stay ahead of every course, assignment, and deadline.</h1>
+        <p>One place to track your classes, grades, and study time — built to keep you organized without the clutter.</p>
+      </div>
+      <ul class="brand-points">
+        <li>Track courses & assignments in one view</li>
+        <li>Auto-calculated grades and GPA</li>
+        <li>Built-in study timer & session logs</li>
+      </ul>
+    </div>
+
+    <div class="form-panel">
+      <div class="form-card">
+        <h2>Welcome back</h2>
+        <p class="form-sub">Log in to continue to your dashboard</p>
+
+        <form id="loginForm">
+          <div class="field">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="you@example.com" required>
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+          </div>
+          <button type="submit">Log In</button>
+          <p id="errorMsg" class="error"></p>
+        </form>
+
+        <p class="switch">Don't have an account? <a href="register.html">Sign up</a></p>
+      </div>
+    </div>
+  </div>
+  <script src="js/login.js"></script>
+</body>
+</html>

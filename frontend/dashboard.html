@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun Study — Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="logo">FS</div>
+      <span class="app-name">Fun Study</span>
+    </div>
+    <div class="topbar-right">
+      <span id="userEmail" class="user-email"></span>
+      <div class="avatar" id="avatar"></div>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+  </header>
+
+  <div class="body-layout">
+    <aside class="sidebar">
+      <nav>
+        <a href="dashboard.html" class="active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          Dashboard
+        </a>
+        <a href="courses.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Courses
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Assignments
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Study Tasks
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Grades
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          Timer
+        </a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <div class="page-head">
+        <h1>Dashboard</h1>
+        <p class="page-sub">Here's what's happening across your courses.</p>
+      </div>
+
+      <section class="stat-row">
+        <div class="stat-card">
+          <p class="stat-label">Courses</p>
+          <p class="stat-value" id="totalCourses">–</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">Pending Assignments</p>
+          <p class="stat-value" id="pendingAssignments">–</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">Completed</p>
+          <p class="stat-value" id="completedAssignments">–</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">Due This Week</p>
+          <p class="stat-value" id="upcomingDeadlines">–</p>
+        </div>
+      </section>
+
+      <section class="panel-row">
+        <div class="panel progress-panel">
+          <p class="panel-title">Overall Progress</p>
+          <div class="progress-ring-wrap">
+            <svg viewBox="0 0 120 120" class="progress-ring">
+              <circle cx="60" cy="60" r="52" class="ring-bg"/>
+              <circle cx="60" cy="60" r="52" class="ring-fg" id="progressRing"/>
+            </svg>
+            <div class="progress-center">
+              <span id="overallProgress">–</span>
+            </div>
+          </div>
+          <p class="panel-note">of all assignments completed</p>
+        </div>
+
+        <div class="panel hours-panel">
+          <p class="panel-title">Study Hours</p>
+          <p class="hours-value"><span id="totalStudyHours">–</span> <span class="hours-unit">hrs</span></p>
+          <p class="panel-note">logged across all sessions</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

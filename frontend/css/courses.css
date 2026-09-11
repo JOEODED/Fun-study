@@ -1,0 +1,82 @@
+.page-head { display: flex; justify-content: space-between; align-items: flex-start; }
+
+.primary-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.primary-btn:hover { background: #2c4de0; }
+
+.ghost-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.7rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.ghost-btn:hover { color: var(--text); }
+
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+table { width: 100%; border-collapse: collapse; }
+th {
+  text-align: left;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+}
+td {
+  padding: 0.9rem 1.2rem;
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--border);
+}
+tr:last-child td { border-bottom: none; }
+
+.empty-row { text-align: center; color: var(--muted); padding: 2rem; }
+
+.row-actions { display: flex; gap: 0.6rem; justify-content: flex-end; }
+.row-actions button {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); font-size: 0.8rem;
+}
+.row-actions button:hover { color: var(--accent); }
+.row-actions .delete-btn:hover { color: #d6304a; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(20,25,40,0.4);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 50;
+}
+.modal-overlay.hidden { display: none; }
+
+.modal {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+.modal h2 { font-size: 1.2rem; margin-bottom: 1.3rem; }
+
+.field-row { display: flex; gap: 1rem; }
+.field-row .field { flex: 1; }
+
+.modal-actions { display: flex; justify-content: flex-end; gap: 0.7rem; margin-top: 1.3rem; }
