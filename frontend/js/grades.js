@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://fun-study-backend.onrender.com/api";
 const userEmail = localStorage.getItem("userEmail");
 
 if (!userEmail) window.location.href = "index.html";
