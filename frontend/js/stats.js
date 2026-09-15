@@ -24,29 +24,16 @@ async function loadStats() {
     document.getElementById("statCourses").textContent = data.totalCourses ?? "-";
     document.getElementById("statPending").textContent = data.pendingAssignments ?? "-";
     document.getElementById("statCompleted").textContent = data.completedAssignments ?? "-";
-    document.getElementById("statMinutes").textContent = data.totalStudyMinutes ?? "-";
+    document.getElementById("statMinutes").textContent =
+      data.totalStudyHours !== undefined ? `${data.totalStudyHours} hrs` : "-";
 
-    renderChart(data.weeklyStudyMinutes || {});
+    // The backend doesn't currently return a day-by-day breakdown,
+    // so we show an honest empty state rather than fake zero bars.
+    chartEl.innerHTML = `<p class="empty-row">Daily breakdown isn't available yet — only totals are tracked right now.</p>`;
   } catch (err) {
     chartEl.innerHTML = `<p class="empty-row">Could not reach the server. Is the backend running?</p>`;
   }
 }
 
-function renderChart(weekData) {
-  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const values = days.map(d => weekData[d] || 0);
-  const max = Math.max(...values, 1);
-
-  chartEl.innerHTML = days.map((day, i) => {
-    const heightPct = Math.round((values[i] / max) * 100);
-    return `
-      <div class="bar-col">
-        <span class="bar-value">${values[i]}</span>
-        <div class="bar" style="height: ${heightPct}%;"></div>
-        <span class="bar-label">${day}</span>
-      </div>
-    `;
-  }).join("");
-}
-
 loadStats();
+
