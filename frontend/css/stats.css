@@ -1,0 +1,40 @@
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.2rem;
+  height: 190px;
+  padding-top: 1rem;
+}
+
+.bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.bar {
+  width: 100%;
+  max-width: 38px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+  border-radius: 8px 8px 3px 3px;
+  min-height: 4px;
+  transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(56,96,255,0.2);
+}
+
+.bar-label {
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.bar-value {
+  font-size: 0.74rem;
+  color: var(--text);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}

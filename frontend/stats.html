@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fun Study — Courses</title>
+  <title>Fun Study — Statistics</title>
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/courses.css">
   <link rel="stylesheet" href="css/stats.css">
@@ -28,7 +28,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
           Dashboard
         </a>
-        <a href="courses.html" class="active">
+        <a href="courses.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Courses
         </a>
@@ -48,82 +48,49 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           Timer
         </a>
-              <a href="stats.html">
+        <a href="stats.html" class="active">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 15l4-6 3 3 5-7"/></svg>
           Statistics
         </a>
-</nav>
+      </nav>
     </aside>
 
     <main class="content">
       <div class="page-head">
         <div>
-          <h1>Courses</h1>
-          <p class="page-sub">Everything you're taking this semester.</p>
+          <h1>Statistics</h1>
+          <p class="page-sub">Your overall study activity.</p>
         </div>
-        <button id="addCourseBtn" class="primary-btn">+ Add Course</button>
       </div>
 
-      <div class="filter-row">
-        <input type="text" id="searchInput" placeholder="Search by course code...">
-      </div>
+      <section class="stat-row">
+        <div class="stat-card">
+          <p class="stat-label">Total Courses</p>
+          <p class="stat-value" id="statCourses">–</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">Pending Assignments</p>
+          <p class="stat-value" id="statPending">–</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">Completed Assignments</p>
+          <p class="stat-value" id="statCompleted">–</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-label">Total Study Minutes</p>
+          <p class="stat-value" id="statMinutes">–</p>
+        </div>
+      </section>
 
-      <div class="table-wrap">
-        <table id="coursesTable">
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Name</th>
-              <th>Lecturer</th>
-              <th>Units</th>
-              <th>Semester</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="coursesBody">
-            <tr><td colspan="6" class="empty-row">Loading...</td></tr>
-          </tbody>
-        </table>
+      <div class="panel" style="margin-top: 1rem;">
+        <p class="panel-title">Weekly Study Activity</p>
+        <div class="bar-chart" id="weeklyChart">
+          <p class="empty-row">Loading...</p>
+        </div>
       </div>
     </main>
   </div>
 
-  <!-- Add/Edit Modal -->
-  <div id="courseModal" class="modal-overlay hidden">
-    <div class="modal">
-      <h2 id="modalTitle">Add Course</h2>
-      <form id="courseForm">
-        <input type="hidden" id="courseId">
-        <div class="field">
-          <label for="courseCode">Course Code</label>
-          <input type="text" id="courseCode" placeholder="CSC301" required>
-        </div>
-        <div class="field">
-          <label for="courseName">Course Name</label>
-          <input type="text" id="courseName" placeholder="Data Structures" required>
-        </div>
-        <div class="field">
-          <label for="lecturer">Lecturer</label>
-          <input type="text" id="lecturer" placeholder="Dr. Smith">
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="creditUnits">Credit Units</label>
-            <input type="number" id="creditUnits" placeholder="3" min="0" required>
-          </div>
-          <div class="field">
-            <label for="semester">Semester</label>
-            <input type="text" id="semester" placeholder="Fall 2026">
-          </div>
-        </div>
-        <div class="modal-actions">
-          <button type="button" id="cancelBtn" class="ghost-btn">Cancel</button>
-          <button type="submit" class="primary-btn">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <script src="js/courses.js"></script>
+  <script src="js/stats.js"></script>
 </body>
 </html>

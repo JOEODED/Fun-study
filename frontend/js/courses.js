@@ -19,13 +19,26 @@ const modal = document.getElementById("courseModal");
 const form = document.getElementById("courseForm");
 const modalTitle = document.getElementById("modalTitle");
 
-async function loadCourses() {
+const searchInput = document.getElementById("searchInput");
+let searchTimeout = null;
+
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => loadCourses(searchInput.value.trim()), 300);
+  });
+}
+
+async function loadCourses(keyword) {
   try {
-    const res = await fetch(`${API_BASE}/courses`, { headers });
+    const url = keyword
+      ? `${API_BASE}/search/courses?keyword=${encodeURIComponent(keyword)}`
+      : `${API_BASE}/courses`;
+    const res = await fetch(url, { headers });
     const courses = await res.json();
 
     if (courses.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6" class="empty-row">No courses yet — click "Add Course" to get started.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6" class="empty-row">${keyword ? "No courses match your search." : "No courses yet — click \"Add Course\" to get started."}</td></tr>`;
       return;
     }
 

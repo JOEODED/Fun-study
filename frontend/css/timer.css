@@ -1,0 +1,109 @@
+.timer-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; margin-top: 1.5rem; }
+
+.timer-card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 22px;
+  padding: 2.6rem 3rem 2.2rem;
+  text-align: center;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: var(--shadow-lg);
+  transition: box-shadow 0.3s ease;
+}
+
+.timer-badge {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1.6rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.timer-card.mode-break .timer-badge {
+  background: #e9f9ef;
+  color: #1a9d54;
+}
+
+.ring-wrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 1.6rem;
+}
+
+.timer-ring { width: 220px; height: 220px; transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: var(--border-soft); stroke-width: 12; }
+.ring-progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 615.75;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+}
+
+.timer-card.mode-break .ring-progress { stroke: #1a9d54; }
+
+.ring-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+
+.timer-display {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.timer-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.course-field { max-width: 280px; margin: 0 auto 1.6rem; text-align: left; }
+
+.timer-controls { display: flex; gap: 0.8rem; justify-content: center; align-items: center; }
+
+.timer-main-btn {
+  min-width: 140px;
+  padding: 0.9rem 1.6rem;
+  font-size: 0.94rem;
+}
+
+.icon-btn {
+  width: 46px; height: 46px;
+  padding: 0 !important;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50% !important;
+}
+.icon-btn svg { width: 18px; height: 18px; }
+.icon-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.timer-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  max-width: 460px;
+}
+
+@media (max-width: 500px) {
+  .timer-card { padding: 2rem 1.5rem; }
+  .ring-wrap { width: 180px; height: 180px; }
+  .timer-ring { width: 180px; height: 180px; }
+  .timer-display { font-size: 2.4rem; }
+}

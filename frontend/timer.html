@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fun Study — Courses</title>
+  <title>Fun Study — Timer</title>
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/courses.css">
-  <link rel="stylesheet" href="css/stats.css">
+  <link rel="stylesheet" href="css/timer.css">
 </head>
 <body>
   <header class="topbar">
@@ -28,7 +28,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
           Dashboard
         </a>
-        <a href="courses.html" class="active">
+        <a href="courses.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Courses
         </a>
@@ -44,7 +44,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           Grades
         </a>
-        <a href="timer.html">
+        <a href="timer.html" class="active">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           Timer
         </a>
@@ -58,72 +58,58 @@
     <main class="content">
       <div class="page-head">
         <div>
-          <h1>Courses</h1>
-          <p class="page-sub">Everything you're taking this semester.</p>
+          <h1>Study Timer</h1>
+          <p class="page-sub">Pomodoro-style focus sessions.</p>
         </div>
-        <button id="addCourseBtn" class="primary-btn">+ Add Course</button>
       </div>
 
-      <div class="filter-row">
-        <input type="text" id="searchInput" placeholder="Search by course code...">
-      </div>
+      <div class="timer-wrap">
+        <div class="timer-card" id="timerCard">
+          <span class="timer-badge" id="timerBadge">Study Session</span>
 
-      <div class="table-wrap">
-        <table id="coursesTable">
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Name</th>
-              <th>Lecturer</th>
-              <th>Units</th>
-              <th>Semester</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="coursesBody">
-            <tr><td colspan="6" class="empty-row">Loading...</td></tr>
-          </tbody>
-        </table>
+          <div class="ring-wrap">
+            <svg viewBox="0 0 220 220" class="timer-ring">
+              <circle cx="110" cy="110" r="98" class="ring-track"/>
+              <circle cx="110" cy="110" r="98" class="ring-progress" id="ringProgress"/>
+            </svg>
+            <div class="ring-center">
+              <span class="timer-display" id="timerDisplay">25:00</span>
+              <span class="timer-sub" id="timerSub">Ready when you are</span>
+            </div>
+          </div>
+
+          <div class="field course-field">
+            <label for="courseSelect">Course (optional)</label>
+            <select id="courseSelect">
+              <option value="">No specific course</option>
+            </select>
+          </div>
+
+          <div class="timer-controls">
+            <button id="resetBtn" class="ghost-btn icon-btn" title="Reset">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            </button>
+            <button id="startBtn" class="primary-btn timer-main-btn">Start</button>
+            <button id="pauseBtn" class="ghost-btn icon-btn" title="Pause" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="timer-stats">
+          <div class="stat-card">
+            <p class="stat-label">Sessions Completed Today</p>
+            <p class="stat-value" id="sessionsToday">0</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Total Study Minutes</p>
+            <p class="stat-value" id="totalMinutes">–</p>
+          </div>
+        </div>
       </div>
     </main>
   </div>
 
-  <!-- Add/Edit Modal -->
-  <div id="courseModal" class="modal-overlay hidden">
-    <div class="modal">
-      <h2 id="modalTitle">Add Course</h2>
-      <form id="courseForm">
-        <input type="hidden" id="courseId">
-        <div class="field">
-          <label for="courseCode">Course Code</label>
-          <input type="text" id="courseCode" placeholder="CSC301" required>
-        </div>
-        <div class="field">
-          <label for="courseName">Course Name</label>
-          <input type="text" id="courseName" placeholder="Data Structures" required>
-        </div>
-        <div class="field">
-          <label for="lecturer">Lecturer</label>
-          <input type="text" id="lecturer" placeholder="Dr. Smith">
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="creditUnits">Credit Units</label>
-            <input type="number" id="creditUnits" placeholder="3" min="0" required>
-          </div>
-          <div class="field">
-            <label for="semester">Semester</label>
-            <input type="text" id="semester" placeholder="Fall 2026">
-          </div>
-        </div>
-        <div class="modal-actions">
-          <button type="button" id="cancelBtn" class="ghost-btn">Cancel</button>
-          <button type="submit" class="primary-btn">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <script src="js/courses.js"></script>
+  <script src="js/timer.js"></script>
 </body>
 </html>
